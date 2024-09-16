@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1 id="4-in-line">4-in-line</h1>
-        <h2 id="-">简介</h2>
+        <h2>简介</h2>
         <ol>
             <li>
                 我在 9 月 1
@@ -25,7 +25,7 @@
                 >。玩法在网站里面有介绍。
             </li>
         </ol>
-        <h2 id="-">过程</h2>
+        <h2>过程</h2>
         <ul>
             <li>
                 <p>
@@ -38,14 +38,14 @@
             </li>
             <li><p>这其中也遇到了许多麻烦，下面就把这些麻一一列举出来：</p></li>
         </ul>
-        <h3 id="-">难点</h3>
+        <h3>难点</h3>
         <ul>
             <li>
                 这里都是我在做这个项目的时候遇到的困难，详细笔记在 Github
                 上面，<a
                     href="https://github.com/yogu13579/diary/tree/master/Books/4%20in%20a%20line"
-                    >点击这里</a
-                >查看详细笔记。下面我就开始说这些难点了：
+                >点击这里</a>
+                    查看详细笔记。下面我就开始说这些难点了：
             </li>
         </ul>
         <h4 id="-">第一个，画表格以及检测鼠标位置：</h4>
@@ -66,21 +66,22 @@
         <h5 id="-">解决方案</h5>
         <p>
             画格子我是用
-            <code
-                >javascript grid-template: repeat(5, 1fr) / repeat(8,
-                1fr);</code
-            >
+            <code>
+                grid-template: repeat(5, 1fr) / repeat(8,1fr);
+            </code>
         </p>
-        <pre><code>也就是把整体竖着平均分成 <span class="hljs-number">5</span> 分， 横着平均分成 <span class="hljs-number">8</span> 分。
-        </code></pre>
+
+        <pre>也就是把整体竖着平均分成 5 分， 横着平均分成 8 分。</pre>
+
         <p>
             侦听器是这么写的
-            <code
-                >javascriptdocument.addEventListener(&#39;mousemove&#39;,
-                getmouse);</code
-            >
+            <code>
+                javascriptdocument.addEventListener(&#39;mousemove&#39;,getmouse);
+            </code>
+
         </p>
-        <pre><code>getmouse 是一个函数里面用 ```javascript .clientX``` 和 ```javascript .clientY ``` 得到鼠标的坐标，然后 ```javascript console.log() ``` 。
-        </code></pre>
+        <pre>
+        <code> getmouse 是一个函数里面用 <code>.clientX</code> 和 <code> .clientY </code> 得到鼠标的坐标，然后<code> console.log()</code>。
+        </pre>
     </body>
 </html>
