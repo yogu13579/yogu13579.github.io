@@ -9,7 +9,7 @@
         <h1 id="4-in-line">4-in-line</h1>
         <h2 id="-">简介</h2>
         <ol>
-            <p>
+            <li>
                 我在 9 月 1
                 日正式做完了这个项目，这是一个连接四子的小游戏，用的语言是
                 javascript，代码耗时 6 天，其他的比如 Github page
@@ -17,33 +17,57 @@
                     href="https://github.com/yogu13579/4-in-line"
                     >这里</a
                 >查看源代码。
-            </p>
-            <p>
+            </li>
+            <li>
                 游戏的话我挂在了 Github page 上，这是我的 Github page 网址：<a
                     href="https://yogu13579.github.io/4-in-line/"
                     >https://yogu13579.github.io/4-in-line/</a
                 >。玩法在网站里面有介绍。
-            </p>
+            </li>
         </ol>
         <h2 id="-">过程</h2>
-        <p>
-            我这个项目借鉴了很多 Javascript Snake (Coding Nepal
-            的作品)里面的东西，Snake 的代码在<a
-                href="https://www.codingnepalweb.com/create-snake-game-htm-css-javascript/"
-                >这里</a
-            >。
-        </p>
-        <p>这其中也遇到了许多麻烦，下面就把这些麻一一列举出来：</p>
+        <ul>
+            <li>
+                <p>
+                    我这个项目借鉴了很多 Javascript Snake (Coding Nepal
+                    的作品)里面的东西，Snake 的代码在<a
+                        href="https://www.codingnepalweb.com/create-snake-game-htm-css-javascript/"
+                        >这里</a
+                    >。
+                </p>
+            </li>
+            <li><p>这其中也遇到了许多麻烦，下面就把这些麻一一列举出来：</p></li>
+        </ul>
         <h3 id="-">难点</h3>
-        <p>
-            这里都是我在做这个项目的时候遇到的困难，详细笔记在 Github 上面，<a
-                href="https://github.com/yogu13579/diary/tree/master/Books/4%20in%20a%20line"
-                >点击这里</a
-            >查看详细笔记。下面我就开始说这些难点了：
-        </p>
+        <ul>
+            <li>
+                这里都是我在做这个项目的时候遇到的困难，详细笔记在 Github
+                上面，<a
+                    href="https://github.com/yogu13579/diary/tree/master/Books/4%20in%20a%20line"
+                    >点击这里</a
+                >查看详细笔记。下面我就开始说这些难点了：
+            </li>
+        </ul>
         <h4 id="-">第一个，画表格以及检测鼠标位置：</h4>
         <p>
             这是我开始以来第一个埂，我用了大半天的时间来解决这个问题，以下是步骤：
         </p>
+        <h5 id="-">思路</h5>
+        <p>照着 Snake 游戏的 HTML 和 CSS 来写。</p>
+        <p>把 30 30 的格子换成 8 5 的格子。</p>
+        <p>
+            要用一个侦听器检测鼠标的移动，然后可能用某个方法去检测鼠标的 X Y
+            值。
+        </p>
+        <h5 id="-">解决方案</h5>
+        <p>画格子我是用 grid-template: repeat(5, 1fr) / repeat(8, 1fr);</p>
+        <pre><code>也就是把整体竖着平均分成 <span class="hljs-number">5</span> 分， 横着平均分成 <span class="hljs-number">8</span> 分。
+        </code></pre>
+        <p>
+            侦听器是这么写的 document.addEventListener(&#39;mousemove&#39;,
+            getmouse);
+        </p>
+        <pre><code>getmouse 是一个函数里面用 <span class="hljs-selector-class">.clientX</span> 和 <span class="hljs-selector-class">.clientY</span> 得到鼠标的坐标，然后            console.log()。
+        </code></pre>
     </body>
 </html>
