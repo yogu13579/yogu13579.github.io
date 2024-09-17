@@ -46,7 +46,7 @@
                     href="https://github.com/yogu13579/diary/tree/master/Books/4%20in%20a%20line"
                     >点击这里</a
                 >
-                查看详细笔记。下面我就开始说这些难点了：
+                查看详细笔记。下面我就开始说这些难点了(这里是按照时间顺序写的)：
             </li>
         </ul>
         <h4 id="-">第一个，画表格以及检测鼠标位置：</h4>
@@ -80,7 +80,7 @@
         </p>
         <pre> getmouse 是一个函数里面用 <code>.clientX</code> 和 <code> .clientY </code> 得到鼠标的坐标，然后<code> console.log()</code>。</pre>
         </code></pre><h4 id="-">第二个，鼠标所在方块亮显：</h4>
-        <pre>这里说一下，这个功能是前面思路中的重要一环，不可缺。但后面因为各种原因，换了一种思路与方法。这也是卡了我很久的一道难关，所以拿出来说一下。
+        <pre>后面因为各种原因，换了一种思路与方法。但这是卡了我很久的一道难关，所以拿出来说一下。
         </pre>
         <h5 id="-">思路</h5>
         <ul>
@@ -113,5 +113,48 @@
         <pre> 然后用现在的坐标处以我分成的分数，就可以的到一个格子图中的坐标值。</pre>
 
         <pre><code> Math.floor()</code> 用来清除结果的小数点。</pre>
+        <h4 id="-">第三个，方块点击即变红：</h4>
+        <h5 id="-">预计效果</h5>
+        <ol>
+        <li>表格图每个方块分开来，中间有间隔。</li>
+        <li>我只要点击任何一个方块白色方块，它就会变红。</li>
+        </ol>
+        <h5 id="-">思路</h5>
+        <ul>
+        <li>我需要将这个表格的结构重新还画一遍，去找如何能够把表格中的格子分开的办法。</li>
+        <li>然后侦测鼠标点击，然后把鼠标所点击的区域变红。</li>
+        <li>在变红的同时检查它的背景颜色是否为白，如果是就变红，如果不是那就什么也不做。</li>
+        </ul>
+        <h5 id="-">解决方案</h5>
+        <ul>
+        <li>解决这个问题分两步：第一步是把表格之间的间隙画好，第二步是只要点击就把点击到的区域变红。</li>
+        </ul>
+        <p>以下是第一步：</p>
+        <p>html 文件：</p>
+        <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"wrapper"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: #293447;"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"game-details"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: #12141a;"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"turn"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: #12141a;"</span>&gt;</span>Who's turn : red<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"line"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: #12141a;"</span>&gt;</span>It's line 0<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"play-board"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: #212837;;"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">clase</span>=<span class="hljs-string">"div1"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">clase</span>=<span class="hljs-string">"div2"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">clase</span>=<span class="hljs-string">"div3"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!--太长了，中间的与上面的一样，只是数字每次加 1--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">clase</span>=<span class="hljs-string">"div40"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"background-color: white;&gt;&lt;/div&gt;</span></span>
+        </code></pre>
+        <pre><code class="lang-css"><span class="hljs-selector-class">.play-board</span> {
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">display</span>: grid;
+            <span class="hljs-attribute">grid-template</span>: <span class="hljs-built_in">repeat</span>(5, 1fr) / <span class="hljs-built_in">repeat</span>(8, 1fr);
+            <span class="hljs-attribute">gap</span>: <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+        }
+        </code></pre>
+        <pre>  这里首先把除了那 40 个方块以外的区块的背景颜色全部换掉。</pre>
+        <pre>  然后在 play-board 表格图里面加入 40 个背景是白色的 div，然后用 gap 画出间隙，padding 是用于最外面一圈的间隙。</pre>
+        <pre>  这实际上是很傻的办法，在后面我有一条就是用 for 循环来加入这些 div。</pre>
     </body>
 </html>
