@@ -44,8 +44,9 @@
                 这里都是我在做这个项目的时候遇到的困难，详细笔记在 Github
                 上面，<a
                     href="https://github.com/yogu13579/diary/tree/master/Books/4%20in%20a%20line"
-                >点击这里</a>
-                    查看详细笔记。下面我就开始说这些难点了：
+                    >点击这里</a
+                >
+                查看详细笔记。下面我就开始说这些难点了：
             </li>
         </ul>
         <h4 id="-">第一个，画表格以及检测鼠标位置：</h4>
@@ -66,9 +67,7 @@
         <h5 id="-">解决方案</h5>
         <p>
             画格子我是用
-            <code>
-                grid-template: repeat(5, 1fr) / repeat(8,1fr);
-            </code>
+            <code> grid-template: repeat(5, 1fr) / repeat(8,1fr); </code>
         </p>
 
         <pre> 也就是把整体竖着平均分成 5 分， 横着平均分成 8 分。</pre>
@@ -78,8 +77,42 @@
             <code>
                 javascriptdocument.addEventListener(&#39;mousemove&#39;,getmouse);
             </code>
-
         </p>
         <pre> getmouse 是一个函数里面用 <code>.clientX</code> 和 <code> .clientY </code> 得到鼠标的坐标，然后<code> console.log()</code>。</pre>
+        </code></pre><h4 id="-">第二个，鼠标所在方块亮显：</h4>
+        <pre>这里说一下，这个功能是前面思路中的重要一环，不可缺。但后面因为各种原因，换了一种思路与方法。这也是卡了我很久的一道难关，所以拿出来说一下。
+        </pre>
+        <h5 id="-">思路</h5>
+        <ul>
+        <li><p>把鼠标的坐标变成在鼠标格子中的坐标，需要把除了我的格子图外的坐标减掉，然后在除以我要分的分数，就可以的到鼠标在格子图中的坐标。</p>
+        </li>
+        <li><p>要变颜色可以在我这个方框里多加一个 div 就可以将其变成红色，坐标就是前面算出来的鼠标在格子图里的坐标。</p>
+        </li>
+        </ul>
+        <h5 id="-">解决方案</h5>
+
+        <p>把显示的坐标变成格子坐标：</p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">rect</span> = playBoard.getBoundingClientRect();
+
+          <span class="hljs-keyword">const</span> realWidth = <span class="hljs-built_in">rect</span>.<span class="hljs-built_in">width</span> / <span class="hljs-number">8</span>;
+          <span class="hljs-keyword">const</span> realHight = <span class="hljs-built_in">rect</span>.<span class="hljs-built_in">height</span> / <span class="hljs-number">5</span>;
+
+          <span class="hljs-keyword">const</span> <span class="hljs-built_in">mouseX</span> = event.clientX - <span class="hljs-built_in">rect</span>.left;
+          <span class="hljs-keyword">const</span> <span class="hljs-built_in">mouseY</span> = event.clientY - <span class="hljs-built_in">rect</span>.top;
+
+          let x = Math.<span class="hljs-built_in">floor</span>(<span class="hljs-built_in">mouseX</span> / realWidth);
+          let y = Math.<span class="hljs-built_in">floor</span>(<span class="hljs-built_in">mouseY</span> / realHight);
+        </code></pre>
+        <pre> 用 <code>.getBoundingClientRect()</code> 方法得到用 rect 创建的新的 DOMRect 对象。</pre>
+
+        <pre> 然后把格子图的宽和高分好，这样等下就可以计算鼠标位置。</pre>
+
+        <pre><code> event.clientY(.clientX) </code> 算出来的坐标是相对于整个网页的而它的(0,0)坐标作网页的最左上角。</pre>
+        <pre> 因此要 用 <code> rect.left </code> 和 <code> rect.top </code> 去掉上面和左边，这样坐标(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)就是在这个格子图的左上角。</pre>
+
+        <pre> 然后用现在的坐标处以我分成的分数，就可以的到一个格子图中的坐标值。</pre>
+
+        <pre><code> Math.floor()</code> 用来清除结果的小数点。
+        </pre>
     </body>
 </html>
